@@ -7,3 +7,13 @@
  * Pro tip: Think about whether to use useState or useRef and why.
  */
 
+import { useState } from 'react';
+
+let id = 0;
+
+export const useUniqueId = (prefix: string) => {
+  const [state] = useState(id++);
+
+  return `${prefix}-${state}`;
+};
+

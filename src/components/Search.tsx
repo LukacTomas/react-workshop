@@ -1,6 +1,7 @@
 import { Stack } from './Stack.tsx';
 import { ChangeEvent, useState } from 'react';
 import { useDebounce } from './hooks/useDebounce.ts';
+import { useUniqueId } from './hooks/useUniqueId.ts';
 
 interface SearchProps {
   placeholder: string;
@@ -11,7 +12,7 @@ interface SearchProps {
 export function Search({ label, placeholder, onSearch }: SearchProps) {
   const [value, setValue] = useState<string>('');
   const debounceSearch = useDebounce( onSearch ?? console.log, 500)
-  const id = 'book-search'; // TODO change this to use new hook
+  const id = useUniqueId('book-search');
 
   console.log('Search rendered with label: ', label);
 
