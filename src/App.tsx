@@ -6,26 +6,26 @@ import { useState } from 'react';
 
 /*
 * Exercise (10 min)
-* Create 3 states in the App component
-*   - for book, movie, and car
-* Create 3 functions to update the states
-*  - handleSearchBook, handleSearchMovie, handleSearchCar
+* 1. wrap handleSearchBook, handleSearchMovie, handleSearchCar with useCallback
+* - observe the console.log when typing in the search box
+* - Use Profiler to see the performance difference
+* - make a note what you observe
 *
-* Update the Search component to accept the onSearch prop
-*  - update interface to include onSearch prop
-*  - onSearch should be a function that accepts a string
-*  - call the onSearch function with the input value
+* 2. wrap Search with memo
+* - observe the console.log when typing in the search box
+* - Use Profiler to see the performance difference
+* - make a note what you observe
 *
-* Update the App component
-* - pass the onSearch function to the Search component
+* 3. remove useCallback from handleSearchBook, handleSearchMovie, handleSearchCar
+* - observe the console.log when typing in the search box
+* - Use Profiler to see the performance difference
+* - make a note what you observe
 *
-* Use SearchResult component to display the result for each search
+* 4. add useCallback back to functions and wrap SearchResult, heading, footer with memo
+* - observe the console.log when typing in the search box
+* - Use Profiler to see the performance difference
+* - make a note what you observe
 *
-* Bonus:
-* Observe the console logs in the Search component
-* Try Profiler with React DevTools
-*
-
 * */
 
 function App() {
