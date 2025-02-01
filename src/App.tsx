@@ -9,6 +9,8 @@ function App() {
     <>
       <Heading />
       <MovieSearch />
+      <MovieSearch />
+      <MovieSearch />
       <Footer />
     </>
   )

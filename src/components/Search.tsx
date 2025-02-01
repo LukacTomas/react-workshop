@@ -11,6 +11,7 @@ interface SearchProps {
 export function Search({ label, placeholder, onSearch }: SearchProps) {
   const [value, setValue] = useState<string>('');
   const debounceSearch = useDebounce( onSearch ?? console.log, 500)
+  const id = 'book-search'; // TODO change this to use new hook
 
   console.log('Search rendered with label: ', label);
 
@@ -21,8 +22,8 @@ export function Search({ label, placeholder, onSearch }: SearchProps) {
 
   return (
     <Stack align="start">
-      <label>{label}</label>
-      <input value={value} onChange={onHandleInputChange}  type="text" placeholder={placeholder} />
+      <label htmlFor={id}>{label}</label>
+      <input id={id} value={value} onChange={onHandleInputChange}  type="text" placeholder={placeholder} />
     </Stack>
   );
 }
