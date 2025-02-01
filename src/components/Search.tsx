@@ -4,15 +4,17 @@ import { ChangeEvent, useState } from 'react';
 interface SearchProps {
   placeholder: string;
   label: string;
+  onSearch?: (query: string) => void;
 }
 
-export function Search({ label, placeholder,  }: SearchProps) {
+export function Search({ label, placeholder, onSearch }: SearchProps) {
   const [value, setValue] = useState<string>('');
 
   console.log('Search rendered with label: ', label);
 
   function onHandleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
+    onSearch?.(event.target.value);
   }
 
   return (

@@ -2,6 +2,7 @@ import './App.css';
 import { Heading } from './components/Heading.tsx';
 import { Footer } from './components/Footer.tsx';
 import { Search } from './components/Search.tsx';
+import { useState } from 'react';
 
 /*
 * Exercise (10 min)
@@ -28,13 +29,31 @@ import { Search } from './components/Search.tsx';
 * */
 
 function App() {
+  const [book, setBook] = useState('');
+  const [movie, setMovie] = useState('');
+  const [car, setCar] = useState('');
+
+  const handleSearchBook = (query: string) => {
+    setBook(query);
+  }
+
+  const handleSearchMovie = (query: string) => {
+    setMovie(query);
+  }
+
+  const handleSearchCar = (query: string) => {
+    setCar(query);
+  }
 
   return (
     <>
       <Heading />
-      <Search placeholder="My search 1" label="Book" />
-      <Search placeholder="My search 2" label="Movie" />
-      <Search placeholder="My search 3" label="Car" />
+      <Search placeholder="My search 1" label="Book" onSearch={handleSearchBook} />
+      <SearchResult result={book} />
+      <Search placeholder="My search 2" label="Movie" onSearch={handleSearchMovie} />
+      <SearchResult result={movie} />
+      <Search placeholder="My search 3" label="Car" onSearch={handleSearchCar}/>
+      <SearchResult result={car} />
       <Footer />
     </>
   )
