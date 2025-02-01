@@ -2,7 +2,7 @@ import './App.css';
 import { Heading } from './components/Heading.tsx';
 import { Footer } from './components/Footer.tsx';
 import { Search } from './components/Search.tsx';
-import { useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 /*
 * Exercise (10 min)
@@ -33,17 +33,17 @@ function App() {
   const [movie, setMovie] = useState('');
   const [car, setCar] = useState('');
 
-  const handleSearchBook = (query: string) => {
+  const handleSearchBook = useCallback((query: string) => {
     setBook(query);
-  }
+  }, []);
 
-  const handleSearchMovie = (query: string) => {
+  const handleSearchMovie = useCallback((query: string) => {
     setMovie(query);
-  }
+  }, []);
 
-  const handleSearchCar = (query: string) => {
+  const handleSearchCar = useCallback((query: string) => {
     setCar(query);
-  }
+  },  []);
 
   return (
     <>
@@ -59,10 +59,10 @@ function App() {
   )
 }
 
-function SearchResult({ result }: { result: string }) {
+const SearchResult = memo(function SearchResult({ result }: { result: string }) {
   return (
     <h3> {result}</h3>
   );
-}
+})
 
 export default App

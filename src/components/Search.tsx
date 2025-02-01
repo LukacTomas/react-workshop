@@ -1,5 +1,5 @@
 import { Stack } from './Stack.tsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 
 interface SearchProps {
   placeholder: string;
@@ -7,7 +7,7 @@ interface SearchProps {
   onSearch?: (query: string) => void;
 }
 
-export function Search({ label, placeholder, onSearch }: SearchProps) {
+export const Search = memo( function Search({ label, placeholder, onSearch }: SearchProps) {
   const [value, setValue] = useState<string>('');
 
   console.log('Search rendered with label: ', label);
@@ -23,4 +23,4 @@ export function Search({ label, placeholder, onSearch }: SearchProps) {
       <input value={value} onChange={onHandleInputChange}  type="text" placeholder={placeholder} />
     </Stack>
   );
-}
+});
