@@ -2,67 +2,67 @@ import './App.css';
 import { Heading } from './components/Heading.tsx';
 import { Footer } from './components/Footer.tsx';
 import { Search } from './components/Search.tsx';
-import { memo, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 /*
-* Exercise (10 min)
-* 1. wrap handleSearchBook, handleSearchMovie, handleSearchCar with useCallback
-* - observe the console.log when typing in the search box
-* - Use Profiler to see the performance difference
-* - make a note what you observe
-*
-* 2. wrap Search with memo
-* - observe the console.log when typing in the search box
-* - Use Profiler to see the performance difference
-* - make a note what you observe
-*
-* 3. remove useCallback from handleSearchBook, handleSearchMovie, handleSearchCar
-* - observe the console.log when typing in the search box
-* - Use Profiler to see the performance difference
-* - make a note what you observe
-*
-* 4. add useCallback back to functions and wrap SearchResult, heading, footer with memo
-* - observe the console.log when typing in the search box
-* - Use Profiler to see the performance difference
-* - make a note what you observe
-*
-* */
+Better structure of the code is the key to maintainability and scalability, performance, and readability.
+*/
 
 function App() {
-  const [book, setBook] = useState('');
-  const [movie, setMovie] = useState('');
-  const [car, setCar] = useState('');
-
-  const handleSearchBook = useCallback((query: string) => {
-    setBook(query);
-  }, []);
-
-  const handleSearchMovie = useCallback((query: string) => {
-    setMovie(query);
-  }, []);
-
-  const handleSearchCar = useCallback((query: string) => {
-    setCar(query);
-  },  []);
-
   return (
     <>
       <Heading />
-      <Search placeholder="My search 1" label="Book" onSearch={handleSearchBook} />
-      <SearchResult result={book} />
-      <Search placeholder="My search 2" label="Movie" onSearch={handleSearchMovie} />
-      <SearchResult result={movie} />
-      <Search placeholder="My search 3" label="Car" onSearch={handleSearchCar}/>
-      <SearchResult result={car} />
+      <BookSearch />
+      <MovieSearch />
+      <CarSearch />
       <Footer />
     </>
   )
 }
 
-const SearchResult = memo(function SearchResult({ result }: { result: string }) {
+const BookSearch = () => {
+  const [book, setBook] = useState('');
+  const handleSearchBook = useCallback((query: string) => {
+    setBook(query);
+  }, []);
+  return (
+    <>
+      <Search placeholder="My search 1" label="Book" onSearch={handleSearchBook} />
+      <SearchResult result={book} />
+    </>
+  );
+};
+
+const MovieSearch = () => {
+  const [movie, setMovie] = useState('');
+  const handleSearchMovie = (query: string) => {
+    setMovie(query);
+  };
+  return (
+    <>
+      <Search placeholder="My search 1" label="Movie" onSearch={handleSearchMovie} />
+      <SearchResult result={movie} />
+    </>
+  );
+};
+
+const CarSearch = () => {
+  const [car, setCar] = useState('');
+  const handleSearchCar = (query: string) => {
+    setCar(query);
+  };
+  return (
+    <>
+      <Search placeholder="My search 1" label="Car" onSearch={handleSearchCar} />
+      <SearchResult result={car} />
+    </>
+  );
+};
+
+const SearchResult = function SearchResult({ result }: { result: string }) {
   return (
     <h3> {result}</h3>
   );
-})
+};
 
 export default App
