@@ -1,5 +1,6 @@
 import { Stack } from './Stack.tsx';
 import { ChangeEvent, useState } from 'react';
+import { useDebounce } from './hooks/useDebounce.ts';
 
 interface SearchProps {
   placeholder: string;
@@ -9,12 +10,13 @@ interface SearchProps {
 
 export function Search({ label, placeholder, onSearch }: SearchProps) {
   const [value, setValue] = useState<string>('');
+  const debounceSearch = useDebounce( onSearch ?? console.log, 500)
 
   console.log('Search rendered with label: ', label);
 
   function onHandleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
-    onSearch?.(event.target.value);
+    debounceSearch(event.target.value);
   }
 
   return (
