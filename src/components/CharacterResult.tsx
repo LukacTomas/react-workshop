@@ -1,18 +1,5 @@
 import { useFetch } from './hooks/useFetch.ts';
-
-/**
- * Exercise
- *
- * Hover over "data" and you should see unknown[] | null, let's fix this
- * Inspect the Response for searching in Network tab or in console.
- * Create interface Character that contains the fields as in response.
- * Pass the interface to useFetch to make the data correct type
- * Map through  data and display at least fullName and birthdate
- *
- * Pro tip: don't forget to deal with case when data is null
- * Bonus: you can use loading and error.
- *
- */
+import { Card, CardContent, CardHeading, CardImage } from './Card.tsx';
 
 interface Character {
   index:number;
@@ -44,10 +31,15 @@ export const CharacterResult = ({ result }: { result: string }) => {
     <>
       {
         data.map( character => (
-          <div key={character.index}>
-            <p>{character.fullName}</p>
-            <p>{character.birthdate}</p>
-          </div>
+          <Card key={character.index}>
+            <CardHeading heading={character.fullName} />
+            <CardContent>
+              <p><b>birthdate:</b> {character.birthdate}</p>
+              <p><b>house:</b> {character.hogwartsHouse}</p>
+              <p><b>nickname:</b> {character.nickname}</p>
+            </CardContent>
+            <CardImage src={character.image} alt={character.fullName} />
+          </Card>
         ))
       }
     </>
